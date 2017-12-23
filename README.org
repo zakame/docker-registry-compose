@@ -1,0 +1,41 @@
+#+TITLE: Docker Registry -- Hub Mirror and Local Private
+
+* About
+
+  This is a simple Docker Compose system that lets one run 2 Docker
+  Registries on the same system:
+
+  - A Registry acting as a mirror for the Docker Hub
+  - A Registry for private images, meant for local development and
+    sharing between Docker hosts (including localhost as well as Docker
+    Machines and Minikube)
+
+* How to use
+
+  Launch this just like any Compose system:
+
+  #+BEGIN_SRC sh
+  docker-compose up -d
+  #+END_SRC
+
+  Then, update your Docker host's =dockerd= configuration to run with the
+  =--registry-mirror= and =--insecure-registry= options.  For example, on
+  systems using =/etc/default/docker= for configuration:
+
+  #+BEGIN_EXAMPLE sh
+  # on systems using /etc/default/docker
+  DOCKER_OPTS="--registry-mirror=http://127.0.0.1:50000 --insecure-registry=192.168.42.1:50001"
+  #+END_EXAMPLE
+
+  And for systems using =/etc/docker/daemon.json=:
+
+  #+BEGIN_EXAMPLE json
+  {
+      "insecure-registries": ["192.168.42.1:50001"],
+      "registry-mirrors": ["http://127.0.0.1:5000"]
+  }
+  #+END_EXAMPLE
+
+* See Also
+
+  - [[https://zakame.net/blog/2017/07/mirroring-the-docker-hub.html][Zakame::Blog - Mirroring the Docker Hub]]
