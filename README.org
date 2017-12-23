@@ -36,6 +36,10 @@
   }
   #+END_EXAMPLE
 
+  The containers are configured to always restart, so one just needs to
+  do this initial setup once, and it will retain across Docker host
+  reboots.
+
 * See Also
 
   - [[https://zakame.net/blog/2017/07/mirroring-the-docker-hub.html][Zakame::Blog - Mirroring the Docker Hub]]
