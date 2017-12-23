@@ -22,19 +22,19 @@
   =--registry-mirror= and =--insecure-registry= options.  For example, on
   systems using =/etc/default/docker= for configuration:
 
-  #+BEGIN_EXAMPLE sh
+  #+BEGIN_SRC sh
   # on systems using /etc/default/docker
   DOCKER_OPTS="--registry-mirror=http://127.0.0.1:50000 --insecure-registry=192.168.42.1:50001"
-  #+END_EXAMPLE
+  #+END_SRC
 
   And for systems using =/etc/docker/daemon.json=:
 
-  #+BEGIN_EXAMPLE json
+  #+BEGIN_SRC json
   {
       "insecure-registries": ["192.168.42.1:50001"],
       "registry-mirrors": ["http://127.0.0.1:50000"]
   }
-  #+END_EXAMPLE
+  #+END_SRC
 
   The containers are configured to always restart, so one just needs to
   do this initial setup once, and it will retain across Docker host
