@@ -40,6 +40,38 @@
   do this initial setup once, and it will retain across Docker host
   reboots.
 
+* Tips & Tricks
+
+** Using the same Registries across Docker Machines
+
+   My reference setup is a 6-node Docker Machine setup that I will
+   configure into a Docker Swarm later.  Since I'm using a libvirt/KVM
+   setup where my main Docker Engine is on =192.168.122.1=, I can set up
+   my VMs like this:
+
+   #+BEGIN_SRC sh
+   for m in swarm-{manager,worker}-{1,2,3}; do
+       docker-machine create --driver=kvm --kvm-storage-pool=default \
+                      --engine-opt experimental=true\
+                      --engine-registry-mirror=http://192.168.122.1:50000 \
+                      --engine-insecure-registry http://192.168.122.1:50001 $m
+   done
+   #+END_SRC
+
+** Using external directories for registry volumes
+
+   If you wish to use your host's directory for storing registry data
+   instead of letting Compose make a named volume for you, just change
+   the volumes settings of the registry containers.  For example:
+
+   #+BEGIN_SRC yaml
+   services:
+     registry_mirror:
+     ...
+     volumes:
+       - /my/mirror/directory:/var/lib/registry
+   #+END_SRC
+
 * See Also
 
   - [[https://zakame.net/blog/2017/07/mirroring-the-docker-hub.html][Zakame::Blog - Mirroring the Docker Hub]]
