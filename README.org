@@ -74,6 +74,7 @@
 
 * See Also
 
+  - [[https://zakame.net/blog/2017/12/composing-a-docker-hub-mirror-and-private-registry.html][Zakame::Blog - Composinga Docker Hub Mirror and Private Registry]]
   - [[https://zakame.net/blog/2017/07/mirroring-the-docker-hub.html][Zakame::Blog - Mirroring the Docker Hub]]
 
 * License
