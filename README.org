@@ -51,8 +51,7 @@
 
    #+BEGIN_SRC sh
    for m in swarm-{manager,worker}-{1,2,3}; do
-       docker-machine create --driver=kvm --kvm-storage-pool=default \
-                      --engine-opt experimental=true\
+       docker-machine create ... \
                       --engine-registry-mirror=http://192.168.122.1:50000 \
                       --engine-insecure-registry http://192.168.122.1:50001 $m
    done
